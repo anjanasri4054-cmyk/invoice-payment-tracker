@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Payment Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>FilmTracker</h2>
+
+   <ul class="menu">
+    <li class="menu-item active" onclick="showSection('dashboard', this)">Dashboard</li>
+    <li class="menu-item" onclick="showSection('invoice', this)">Add Invoice</li>
+    <li class="menu-item" onclick="showSection('payments', this)">Payments</li>
+    <li class="menu-item" onclick="showSection('settings', this)">Settings</li>
+</ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Navbar -->
+            <header class="navbar">
+                <h1>Invoice & Payment Tracker</h1>
+
+                <div class="nav-actions">
+    <input type="text" placeholder="Search invoices..." id="searchInput">
+
+    <select id="statusFilter">
+        <option value="all">All</option>
+        <option value="Paid">Paid</option>
+        <option value="Partial">Partial</option>
+        <option value="Pending">Pending</option>
+        <option value="Overdue">Overdue</option>
+    </select>
+<button id="exportBtn">Export CSV</button>
+    <button id="themeToggle">🌙</button>
+</div>
+            </header>
+
+            <!-- Dashboard Cards -->
+            <section class="dashboard-cards" id="dashboard">
+
+                <div class="card">
+                    <h3>Total Revenue</h3>
+                    <p id="totalRevenue">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Paid Amount</h3>
+                    <p id="paidAmount">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Pending Amount</h3>
+                    <p id="pendingAmount">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Overdue Payments</h3>
+                    <p id="overdueCount">0</p>
+                </div>
+
+            </section>
+
+            <!-- Invoice Form -->
+            <section class="invoice-form-section" id="invoice">
+                <h2>Add New Invoice</h2>
+
+                <form id="invoiceForm">
+
+                    <input type="text" id="clientName" placeholder="Client Name" required>
+
+                    <input type="text" id="projectName" placeholder="Project Name" required>
+
+                    <select id="projectType" required>
+                        <option value="">Select Project Type</option>
+                        <option>Wedding Shoot</option>
+                        <option>Commercial Ad</option>
+                        <option>Music Video</option>
+                        <option>Short Film</option>
+                        <option>Corporate Shoot</option>
+                    </select>
+
+                    <input type="number" id="quoteAmount" placeholder="Quote Amount" required>
+
+                    <input type="number" id="paidInput" placeholder="Paid Amount" required>
+
+                    <input type="date" id="dueDate" required>
+
+                    <button type="submit">Add Invoice</button>
+
+                </form>
+            </section>
+
+            <!-- Invoice Table -->
+            <section class="invoice-table-section" id="payments">
+                <h2>Invoices</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client</th>
+                            <th>Project</th>
+                            <th>Type</th>
+                            <th>Quote</th>
+                            <th>Paid</th>
+                            <th>Pending</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="invoiceTableBody">
+                        <!-- JS will insert rows -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="settings" class="invoice-form-section" style="display:none;">
+    <h2>Settings</h2>
+
+    <div class="settings-grid">
+
+        <div class="setting-card">
+            <h3>Theme Mode</h3>
+            <p>Switch between light and dark mode</p>
+            <button id="settingsThemeBtn">Toggle Theme</button>
+        </div>
+
+        <div class="setting-card">
+            <h3>Clear All Data</h3>
+            <p>Delete all saved invoices permanently</p>
+            <button id="clearDataBtn">Clear Data</button>
+        </div>
+
+        <div class="setting-card">
+            <h3>Total Records</h3>
+            <p id="recordCount">0 invoices saved</p>
+        </div>
+
+    </div>
+</section>
+
+        </main>
+
+    </div>
+<div id="historyModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+        <h2>Payment History</h2>
+        <div id="historyDetails"></div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
